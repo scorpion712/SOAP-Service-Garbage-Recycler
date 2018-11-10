@@ -18,3 +18,5 @@ Garbage Recycler Project
 
 Note: User, User Recycling and Recycling are declarated at garbageRecycler.wsdl.
 -----
+
+Implemented using Eclipse JEE with WTP v.2018-09 (4.9.0); Apache Tomcat v.7.0.91; Axis 2 v.1.6.2 and testing with SOAPUI 5.4.0
