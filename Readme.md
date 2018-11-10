@@ -6,14 +6,13 @@ Garbage Recycler Project
  
  Recycling Services are:
  -----------------------
- 
-    + Register User: register a user.
+ + Register User: register a user.
     
-    + Add Recycling to User: add a Recycling to a given username.
+ + Add Recycling to User: add a Recycling to a given username.
     
-    + Get User Recycling list: get the Recycling list for the given username.
+ + Get User Recycling list: get the Recycling list for the given username.
     
-    + Get All Recycling from User: get all the Recycling amount for a given username.
+ + Get All Recycling from User: get all the Recycling amount for a given username.
 
 
 
