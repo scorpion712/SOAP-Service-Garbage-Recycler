@@ -7,10 +7,15 @@ Garbage Recycler Project
  Recycling Services are:
  -----------------------
  
-    - Register User:
+    + Register User: register a user.
     
-    - Add Recycling to User:
+    + Add Recycling to User: add a Recycling to a given username.
     
-    - Get User Recycling list:
+    + Get User Recycling list: get the Recycling list for the given username.
     
-    - Get All Recycling from User:
+    + Get All Recycling from User: get all the Recycling amount for a given username.
+
+
+
+Note: User, User Recycling and Recycling are declarated at garbageRecycler.wsdl.
+-----
