@@ -8,46 +8,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Repository {
-	protected List<User> userList; 
+	protected List<User> userList;
 	protected List<UserRecycling> userRecyclingList;
-	
+
 	private static final float BOTTLESWEIGHT = 0.1f; // weights are in Kg
 	private static final float TETRABRIKSWEIGHT = 0.04f;
 	private static final float PAPAERBOARDWEIGHT = 0.02f;
 	private static final float GLASSWEIGHT = 0.3f;
-	private static final float CANSWEIGHT=  0.07f;
-	
+	private static final float CANSWEIGHT = 0.07f;
+
 	private static Repository _instance = null;
 	
-	private Repository () {
-		userList = new ArrayList<> ();
-		userRecyclingList = new ArrayList <> ();
+
+
+	private Repository() {
+		userList = new ArrayList<>();
+		userRecyclingList = new ArrayList<>();
 	}
-	
+
 	public static Repository Instance() {
-		if (_instance == null) 
+		if (_instance == null)
 			_instance = new Repository();
 		return _instance;
 	}
-	
+
 	public void addUser(User user) {
 		userList.add(user);
 	}
-	
+
 	public void addUserRecycling(UserRecycling ur) {
 		userRecyclingList.add(ur);
 	}
-	
+
 	public int getUserAmount() {
 		return userList.size();
 	}
-	
+
 	public int getUserRecyclingAmount() {
 		return userRecyclingList.size();
 	}
-	
+
 	// Get the User from a given username
-	public User getUserByUsername (String username) {
+	public User getUserByUsername(String username) {
 		for (User user : userList) {
 			if (user.getUsername().equalsIgnoreCase(username)) {
 				return user;
@@ -55,22 +57,22 @@ public class Repository {
 		}
 		return new User();
 	}
-	
+
 	// Get all user recycling from a given username
-	public UserRecycling [] getAllUserRecycling (String username) {
-		List<UserRecycling> returnList = new ArrayList<>(); 
+	public UserRecycling[] getAllUserRecycling(String username) {
+		List<UserRecycling> returnList = new ArrayList<>();
 		for (UserRecycling userRecycling : userRecyclingList) {
 			if (userRecycling.getUser().getUsername().equalsIgnoreCase(username)) {
-				returnList.add(userRecycling); 
+				returnList.add(userRecycling);
 			}
 		}
 		return (UserRecycling[]) returnList.toArray(new UserRecycling[returnList.size()]);
 	}
-	
+
 	// Get all user recycling amount from a given username
 	public Recycling getAllRecycling(String username) {
 		Recycling recycling = new Recycling();
-		int bottles = 0, tetrabriks=0, paperboard=0, glass=0, cans = 0;
+		int bottles = 0, tetrabriks = 0, paperboard = 0, glass = 0, cans = 0;
 		for (UserRecycling userRecycling : userRecyclingList) {
 			if (userRecycling.getUser().getUsername().equalsIgnoreCase(username)) {
 				bottles += userRecycling.getBottles();
@@ -80,14 +82,25 @@ public class Repository {
 				cans += userRecycling.getCans();
 			}
 		}
-		float tons = bottles * BOTTLESWEIGHT + tetrabriks * TETRABRIKSWEIGHT + paperboard * PAPAERBOARDWEIGHT + glass * GLASSWEIGHT + cans * CANSWEIGHT;
-		tons = tons /1000; // parsing kg to tons
+		float tons = bottles * BOTTLESWEIGHT + tetrabriks * TETRABRIKSWEIGHT + paperboard * PAPAERBOARDWEIGHT
+				+ glass * GLASSWEIGHT + cans * CANSWEIGHT;
+		tons = tons / 1000; // parsing kg to tons
 		recycling.setBottles(bottles);
 		recycling.setTetrabriks(tetrabriks);
 		recycling.setPaperboard(paperboard);
 		recycling.setGlass(glass);
 		recycling.setCans(cans);
-		recycling.setTons(tons);
+		recycling.setTons(fixNumber(tons, 5));
 		return recycling;
 	}
+	
+	// fix a float number with the format #.#digits
+	private static float fixNumber (float num, int digits) {
+        float result;
+        result = num * (float) Math.pow(10, digits);
+        result = Math.round(result);
+        result = result/ (float) Math.pow(10, digits);
+        return result;
+    }
+	
 }
