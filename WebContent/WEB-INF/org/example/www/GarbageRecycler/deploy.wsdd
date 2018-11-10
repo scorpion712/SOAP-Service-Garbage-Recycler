@@ -1,0 +1,50 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from garbageRecycler WSDL service -->
+
+  <service name="garbageRecyclerSOAP" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://www.example.org/GarbageRecycler/"/>
+      <parameter name="wsdlServiceElement" value="garbageRecycler"/>
+      <parameter name="schemaUnqualified" value="http://www.example.org/GarbageRecycler/"/>
+      <parameter name="wsdlServicePort" value="garbageRecyclerSOAP"/>
+      <parameter name="className" value="org.example.www.GarbageRecycler.GarbageRecyclerSOAPSkeleton"/>
+      <parameter name="wsdlPortType" value="garbageRecycler"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+      <typeMapping
+        xmlns:ns="http://www.example.org/GarbageRecycler/"
+        qname="ns:UserRecycling"
+        type="java:org.example.www.GarbageRecycler.UserRecycling"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://www.example.org/GarbageRecycler/"
+        qname="ns:User"
+        type="java:org.example.www.GarbageRecycler.User"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://www.example.org/GarbageRecycler/"
+        qname="ns:Recycling"
+        type="java:org.example.www.GarbageRecycler.Recycling"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
