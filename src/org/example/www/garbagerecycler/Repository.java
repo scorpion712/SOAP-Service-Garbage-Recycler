@@ -33,7 +33,9 @@ public class Repository {
 	}
 
 	public void addUser(User user) {
-		userList.add(user);
+		if (!userList.contains(user)) {
+			userList.add(user);
+		}
 	}
 
 	public void addUserRecycling(UserRecycling ur) {
@@ -55,7 +57,7 @@ public class Repository {
 				return user;
 			}
 		}
-		return new User();
+		return null;
 	}
 
 	// Get all user recycling from a given username

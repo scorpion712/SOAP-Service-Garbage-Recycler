@@ -30,12 +30,14 @@ public class GarbageRecyclerSkeleton {
 		Repository repositoryInstance = Repository.Instance();
 		String username = addRecyclingToUser.getUsername(); // get the username
 		User user = repositoryInstance.getUserByUsername(username); // look for the user with that username
-		UserRecycling userRecycling = addRecyclingToUser.getUserRecycling();
-		userRecycling.setUser(user);
-		userRecycling.setDate(new Date()); // set the Date
-		repositoryInstance.addUserRecycling(userRecycling);
-		userRecycling.setId(repositoryInstance.getUserRecyclingAmount()); // set the UserRecycling id
-		response.setUserRecycling(userRecycling); // set the response
+		if (user != null) {
+			UserRecycling userRecycling = addRecyclingToUser.getUserRecycling();
+			userRecycling.setUser(user);
+			userRecycling.setDate(new Date()); // set the Date
+			repositoryInstance.addUserRecycling(userRecycling);
+			userRecycling.setId(repositoryInstance.getUserRecyclingAmount()); // set the UserRecycling id
+			response.setUserRecycling(userRecycling); // set the response
+		}
 
 		return response;
 	}
